@@ -7,9 +7,13 @@ import axios from "axios";
 import Image from "next/image";
 
 const ArticleItem = async () => {
-  const data=await getData()
-  const post=data.randomPost
-  console.log(post)
+  const data = await getData();
+  const post = data.randomPost || {};
+
+  // التحقق من وجود البيانات قبل عرض المكون
+  if (!post || Object.keys(post).length === 0) {
+    return <div>Error: No data available</div>; // أو يمكنك عرض رسالة خطأ مخصصة
+  }
   return (
     <div className="">
       <div className="w-full flex xs:flex-col xs:items-center   lg:flex-row-reverse justify-start   ">
@@ -67,7 +71,12 @@ const ArticleItem = async () => {
   );
 };
 async function getData() {
-  const res = await axios.get("http://localhost:3000/api/randomPost");
-  return res.data;
+  try {
+    const res = await axios.get("http://localhost:3000/api/randomPost");
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return { randomPost: {} }; // إعادة قيمة افتراضية أو يمكنك عرض رسالة خطأ
+  }
 }
 export default ArticleItem;

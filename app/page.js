@@ -3,8 +3,7 @@ import ArticleItem from "@/components/ArticleItem";
 import CardAuthors from "@/components/CardAuthors";
 import Tag from "@/components/Tag";
 import BecomeAuthor from "@/components/BecomeAuthor";
-import { getServerSession } from "next-auth";
-import { authOption } from "@/lib/authOption";
+
 
 export default async function Home() {
 
