@@ -14,7 +14,7 @@ const CommentForm = ({ id }) => {
     e.preventDefault();
 
     if (text !== "") {
-      await axios.post("http://localhost:3000/api/createComment", {
+      await axios.post(`${process.env.APP_URL}/api/createComment`, {
         text: text,
         postId: id,
       });

@@ -32,14 +32,11 @@ const page = async () => {
     </div>
   );
 };
-// async function getData() {
-//   const res = await axios.get("http://localhost:3000/api/posts");
-//   return res.data;
-// }
+
 async function getData(){
   let data;
   try {
-    const res = await axios.get("http://localhost:3000/api/posts");
+    const res = await axios.get(process.env.APP_URL);
     data = res.data;
   } catch (error) {
     console.error("Error fetching posts:", error);

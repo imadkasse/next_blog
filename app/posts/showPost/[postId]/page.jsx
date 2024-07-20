@@ -57,7 +57,7 @@ const page = async ({ params }) => {
   );
 };
 async function getData(id) {
-  const res = await axios.get(`http://localhost:3000/api/post/${id}`);
+  const res = await axios.get(`${process.env.APP_URL}/api/post/${id}`);
   return res.data;
 }
 

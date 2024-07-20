@@ -71,7 +71,7 @@ const Posts = async () => {
   );
 };
 async function getData() {
-  const res = await axios.get("http://localhost:3000/api/posts");
+  const res = await axios.get(`${process.env.APP_URL}/api/posts`);
   return res.data;
 }
 export default Posts;

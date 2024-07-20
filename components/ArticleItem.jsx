@@ -72,7 +72,7 @@ const ArticleItem = async () => {
 };
 async function getData() {
   try {
-    const res = await axios.get("http://localhost:3000/api/randomPost");
+    const res = await axios.get(process.env.APP_URL);
     return res.data;
   } catch (error) {
     console.error("Error fetching data:", error);

@@ -44,7 +44,7 @@ const DeleteAndEditPost = ({ id }) => {
   const handelEdit = async (e) => {
     e.preventDefault();
     if (title !== "" && tag !== "" && imageUrl !== "" && bodyPost !== "") {
-      await axios.put(`http://localhost:3000/api/updatePost/${id}`, {
+      await axios.put(`${process.env.APP_URL}/api/updatePost/${id}`, {
         title: title,
         tag: tag,
         image: imageUrl,
@@ -63,7 +63,7 @@ const DeleteAndEditPost = ({ id }) => {
   const handelDelete = async (e) => {
     e.preventDefault();
     try {
-      await axios.delete(`http://localhost:3000//api/deletePost/${id}`);
+      await axios.delete(`${process.env.APP_URL}/api/deletePost/${id}`);
       router.refresh();
     } catch (error) {
       console.log(error);
