@@ -41,7 +41,7 @@ const AddPost = () => {
     console.log(title, tag, imageUrl, bodyPost);
     if (title !== "" && tag !== "" && imageUrl !== "" && bodyPost !== "") {
       await axios
-        .post(`${process.env.APP_URL}/api/createPost`, {
+        .post(`${process.env.NEXT_PUBLIC_APP_URL_APP}/api/createPost`, {
           title: title,
           tag: tag,
           image: imageUrl,
