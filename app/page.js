@@ -6,11 +6,13 @@ import BecomeAuthor from "@/components/BecomeAuthor";
 
 
 export default async function Home() {
+  
   return (
     <div className="border-t pt-36 dark:text-primary-night  text-primary-day">
       <div className=" sm:container mx-auto xs:pl-4 ">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
           Editor's pick
+          
         </h1>
         <p className="mt-2 md:mt-3 sm:text-xl xs:text-base text-secondary-day">
           Discover the most outstanding articles in all topics of life
