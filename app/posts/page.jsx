@@ -36,7 +36,7 @@ const page = async () => {
 async function getData(){
   let data;
   try {
-    const res = await axios.get(process.env.APP_URL);
+    const res = await axios.get(`${process.env.APP_URL}/api/posts`);
     data = res.data;
   } catch (error) {
     console.error("Error fetching posts:", error);
