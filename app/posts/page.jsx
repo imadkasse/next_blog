@@ -3,7 +3,8 @@ import axios from "axios";
 
 const Page = async () => {
   const data = await getData();
-  console.log(data);
+  console.log(`${process.env.NEXTAUTH_URL}/api/posts`);
+  console.log(data)
 
   if (!data.posts || data.posts.length === 0) {
     return (

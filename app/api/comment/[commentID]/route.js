@@ -5,19 +5,39 @@ import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
   await connectToDB();
+  
   try {
     const postId = params.commentID;
+    
+    if (!postId) {
+      return NextResponse.json(
+        {
+          message: "No post ID provided",
+        },
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    
     const postComments = await Post.findById(postId);
-
+    
+    if (!postComments) {
+      return NextResponse.json(
+        {
+          message: "Post not found",
+        },
+        { status: 404, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
     const commentIds = postComments.comments.map((comment) =>
       comment._id.toString()
     );
+    
     const comments = await Comment.find({ _id: { $in: commentIds } });
 
     return NextResponse.json(
       {
-        message: "Comments GETED successfully",
+        message: "Comments retrieved successfully",
         comments: comments,
       },
       { status: 200, headers: { "Content-Type": "application/json" } }

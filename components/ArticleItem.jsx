@@ -16,8 +16,8 @@ const ArticleItem = async () => {
   }
 
   // التحقق من وجود بيانات الصورة
-  const imageUrl = post.image || '/tagImg.jpg';
-  const userImgUrl = post.userImg || '/avatar.jpg';
+  const imageUrl = post.image || '/imgs/tagImg.jpg';
+  const userImgUrl = post.userImg || '/imgs/avatar.jpg';
 
   return (
     <div className="">
