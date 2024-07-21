@@ -8,6 +8,16 @@ const Posts = async () => {
   const session = await getServerSession(authOption);
   console.log(session?.user.name);
   const data = await getData();
+  console.log(data)
+  if (!data.posts || data.posts.length === 0) {
+    return (
+      <div className=" dark:text-primary-night text-primary-day   py-12">
+        <div className="sm:container mx-auto sm:p-14 lg:p-7 flex justify-center">
+          <p>No posts available.</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="overflow-auto">
       <div className="dark:text-primary-night text-primary-day rounded-xl">
@@ -27,51 +37,60 @@ const Posts = async () => {
             </tr>
           </thead>
           <tbody className="bg-transparent divide-y   divide-slate-800 dark:divide-slate-400 whitespace-wrap">
-            {data.posts !== "{}" ? (
-              data.posts.map((post) =>
-                session?.user?.image === post.userImg ? (
-                  <tr key={post._id}>
-                    <td className="px-4 py-4 text-sm text-center">
-                      <div className="flex items-center gap-3">
-                        <Image
-                          src={post.image}
-                          alt="imgPost"
-                          width={55}
-                          height={50}
-                          className="rounded-xl h-14"
-                        />
-                        <p className=" max-w-36 text-md text-left xs:text-ellipsis xs:overflow-hidden">
-                          {post.title}
-                        </p>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-sm text-center  max-w-16">
-                      {post.likes}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-center max-w-16">
-                      {post.commentsCount}
-                    </td>
-                    <td className="py-8 text-sm font-semibold lg:divide-x-2  divide-slate-800 dark:divide-white text-center  max-w-32 ">
-                      <DeleteAndEditPost id={post._id} />
-                    </td>
-                  </tr>
-                ) : (
-                  ""
-                )
+          {data.posts.map((post) => (
+              session?.user?.image === post.userImg ? (
+                <tr key={post._id}>
+                  <td className="px-4 py-4 text-sm text-center">
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={post.image}
+                        alt="imgPost"
+                        width={55}
+                        height={50}
+                        className="rounded-xl h-14"
+                      />
+                      <p className="max-w-36 text-md text-left xs:text-ellipsis xs:overflow-hidden">
+                        {post.title}
+                      </p>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-sm text-center max-w-16">
+                    {post.likes}
+                  </td>
+                  <td className="px-4 py-4 text-sm text-center max-w-16">
+                    {post.commentsCount}
+                  </td>
+                  <td className="py-8 text-sm font-semibold lg:divide-x-2 divide-slate-800 dark:divide-white text-center max-w-32">
+                    <DeleteAndEditPost id={post._id} />
+                  </td>
+                </tr>
+              ) : (
+                <tr key={post._id}>
+                  <td colSpan="4" className="px-4 py-4 text-sm text-center">
+                    <h1>Not authorized to view this post</h1>
+                  </td>
+                </tr>
               )
-            ) : (
-              <tr>
-                <td><h1>not</h1></td>
-              </tr>
-            )}
+            ))}
           </tbody>
+            
+              
+         
         </table>
       </div>
     </div>
   );
 };
 async function getData() {
-  const res = await axios.get(`${process.env.APP_URL}/api/posts`);
-  return res.data;
+  try {
+    const res = await axios.get(`${process.env.APP_URL}/api/posts`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return {
+      message: "Error fetching posts",
+      posts: [],
+    };
+  }
 }
 export default Posts;

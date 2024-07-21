@@ -1,5 +1,4 @@
 import {
-  ArrowForward,
   BookmarkBorderOutlined,
   FavoriteBorderOutlined,
   SmsOutlined,
@@ -9,7 +8,6 @@ import Link from "next/link";
 
 const Post = ({
   id,
-  title,
   tag,
   body,
   imgUrlPost,

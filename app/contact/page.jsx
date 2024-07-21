@@ -1,7 +1,6 @@
 import {
   EmailOutlined,
   Facebook,
-  FacebookOutlined,
   HomeOutlined,
   Instagram,
   LinkedIn,

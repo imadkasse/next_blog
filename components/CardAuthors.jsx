@@ -12,7 +12,7 @@ const CardAuthors = () => {
       </div>
       <div className="">
         <Image
-          src="/imgs/skyimg.jpg"
+          src="/imgs/avatar.jpg"
           alt="cardImg"
           width={150}
           height={50}

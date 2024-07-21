@@ -1,4 +1,3 @@
-import { ArrowForward } from "@mui/icons-material";
 import Image from "next/image";
 
 const Tag = () => {

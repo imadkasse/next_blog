@@ -1,7 +1,4 @@
-import AddPost from "@/components/dashborad/AddPost";
-import EditProfile from "@/components/dashborad/EditProfile";
 import MenuDashborad from "@/components/dashborad/MenuDashborad";
-import Profile from "@/components/dashborad/Profile";
 
 const page = () => {
   return (
