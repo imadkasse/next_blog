@@ -31,7 +31,7 @@ const CommntLike = async ({ id }) => {
   });
 };
 async function getData(id) {
-  const res = await axios.get(`/api/comment/${id}`);
+  const res = await axios.get(`${process.env.APP_URL}/api/comment/${id}`);
   return res.data;
 }
 
