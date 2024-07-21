@@ -6,7 +6,7 @@ import BecomeAuthor from "@/components/BecomeAuthor";
 
 
 export default async function Home() {
-  
+  console.log(process.env.APP_URL)
   return (
     <div className="border-t pt-36 dark:text-primary-night  text-primary-day">
       <div className=" sm:container mx-auto xs:pl-4 ">

@@ -10,7 +10,7 @@ const Tag = () => {
       </div>
       <div className="">
         <Image
-          src="/imgs/skyimg.jpg"
+          src="/imgs/tagImg.jpg"
           alt="cardImg"
           width={150}
           height={50}
