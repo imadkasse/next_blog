@@ -1,7 +1,7 @@
 import Post from "@/models/post";
 import { connectToDB } from "@/utils/dbConnect";
 import { NextResponse } from "next/server";
-
+connectToDB();
 export async function GET(req) {
   await connectToDB();
   try {
