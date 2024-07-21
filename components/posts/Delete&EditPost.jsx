@@ -64,9 +64,11 @@ const DeleteAndEditPost = ({ id }) => {
     e.preventDefault();
     try {
       await axios.delete(`/api/deletePost/${id}`);
+      setOpenResolve(true);
       router.refresh();
     } catch (error) {
       console.log(error);
+      setOpenRejecte(true);
     }
   };
   return (
@@ -76,7 +78,7 @@ const DeleteAndEditPost = ({ id }) => {
           open={openResolve}
           autoHideDuration={2000}
           onClose={handleClose}
-          message="Updating Post"
+          message="Ok"
         />
         <Snackbar
           open={openRejecte}

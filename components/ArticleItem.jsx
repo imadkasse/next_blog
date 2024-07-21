@@ -11,21 +11,26 @@ const ArticleItem = async () => {
   const post = data.randomPost || {};
 
   // التحقق من وجود البيانات قبل عرض المكون
-  if (!post || Object.keys(post).length === 0) {
+  if (!post || post.length === 0) {
     return <div>Error: No data available</div>; // أو يمكنك عرض رسالة خطأ مخصصة
   }
+
+  // التحقق من وجود بيانات الصورة
+  const imageUrl = post.image || '/tagImg.jpg';
+  const userImgUrl = post.userImg || '/avatar.jpg';
+
   return (
     <div className="">
-      <div className="w-full flex xs:flex-col xs:items-center   lg:flex-row-reverse justify-start   ">
+      <div className="w-full flex xs:flex-col xs:items-center lg:flex-row-reverse justify-start">
         <Image
-          src={post.image}
+          src={imageUrl}
           width={1550}
           height={100}
           alt="imgArticle"
           className="object-cover rounded-3xl lg:w-imgArticle xs:px-2 lg:px-0"
         />
-        <div className="lg:cardImgArticle  xs:cardImgArticleXS shadow-2xl dark:shadow-black/50 shadow-black/40">
-          <button className="bg-pink-100 rounded-xl text-sm p-1  transition duration-200 hover:bg-pink-800 text-pink-800 hover:text-white ">
+        <div className="lg:cardImgArticle xs:cardImgArticleXS shadow-2xl dark:shadow-black/50 shadow-black/40">
+          <button className="bg-pink-100 rounded-xl text-sm p-1 transition duration-200 hover:bg-pink-800 text-pink-800 hover:text-white">
             {post.tag}
           </button>
           <h1 className="text-xl mt-3 dark:text-white min-w-72">
@@ -33,18 +38,18 @@ const ArticleItem = async () => {
           </h1>
           <div className="flex gap-3 items-center mt-4">
             <Image
-              src={post.userImg}
+              src={userImgUrl}
               width={150}
               height={50}
               alt="imgUser"
               className="w-14 h-14 rounded-full"
             />
-            <div className="flex flex-col w-32 ">
+            <div className="flex flex-col w-32">
               <h1 className="text-lg dark:text-white text-primary-day font-semibold">
-              {post.userName}
+                {post.userName}
               </h1>
               <p className="text-sm dark:text-secondary-night text-secondary-day">
-              {post.createdAt}
+                {post.createdAt}
               </p>
             </div>
           </div>
@@ -61,7 +66,7 @@ const ArticleItem = async () => {
             </div>
             <BookmarkBorderOutlined
               fontSize="small"
-              className="text-black dark:text-primary-night  w-8 h-8 p-1 dark: dark:bg-neutral-800 bg-neutral-100/50 rounded-full dark:hover:bg-neutral-600 hover:bg-neutral-100/70 transition duration-200 cursor-pointer"
+              className="text-black dark:text-primary-night w-8 h-8 p-1 dark:bg-neutral-800 bg-neutral-100/50 rounded-full dark:hover:bg-neutral-600 hover:bg-neutral-100/70 transition duration-200 cursor-pointer"
             />
           </div>
         </div>
@@ -70,13 +75,15 @@ const ArticleItem = async () => {
     </div>
   );
 };
+
 async function getData() {
   try {
-    const res = await axios.get(`${process.env.APP_URL}/api/randomPost`);
+    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/randomPost`);
     return res.data;
   } catch (error) {
     console.error("Error fetching data:", error);
-    return { randomPost: {} }; // إعادة قيمة افتراضية أو يمكنك عرض رسالة خطأ
+    return { randomPost: {} }; 
   }
 }
+
 export default ArticleItem;

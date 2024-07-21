@@ -65,11 +65,7 @@ const Posts = async () => {
                   </td>
                 </tr>
               ) : (
-                <tr key={post._id}>
-                  <td colSpan="4" className="px-4 py-4 text-sm text-center">
-                    <h1>Not authorized to view this post</h1>
-                  </td>
-                </tr>
+                ""
               )
             ))}
           </tbody>
@@ -83,7 +79,7 @@ const Posts = async () => {
 };
 async function getData() {
   try {
-    const res = await axios.get(`${process.env.APP_URL}/api/posts`);
+    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/posts`);
     return res.data;
   } catch (error) {
     console.error("Error fetching posts:", error);
