@@ -31,7 +31,9 @@ const CommntLike = async ({ id }) => {
   });
 };
 async function getData(id) {
-  const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/comment/${id}`);
+  const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/comment/${id}`, {
+    cache: "no-store",
+  });
   return res.data;
 }
 

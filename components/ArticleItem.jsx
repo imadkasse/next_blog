@@ -9,7 +9,6 @@ import Image from "next/image";
 const ArticleItem = async () => {
   const data = await getData();
   const post = data.randomPost || {};
-  
 
   // التحقق من وجود البيانات قبل عرض المكون
   if (!post || post.length === 0) {
@@ -17,8 +16,8 @@ const ArticleItem = async () => {
   }
 
   // التحقق من وجود بيانات الصورة
-  const imageUrl = post.image || '/imgs/tagImg.jpg';
-  const userImgUrl = post.userImg || '/imgs/avatar.jpg';
+  const imageUrl = post.image || "/imgs/tagImg.jpg";
+  const userImgUrl = post.userImg || "/imgs/avatar.jpg";
 
   return (
     <div className="">
@@ -79,11 +78,13 @@ const ArticleItem = async () => {
 
 async function getData() {
   try {
-    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/randomPost`);
+    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/randomPost`, {
+      cache: "no-store",
+    });
     return res.data;
   } catch (error) {
     console.error("Error fetching data:", error);
-    return { randomPost: {} }; 
+    return { randomPost: {} };
   }
 }
 

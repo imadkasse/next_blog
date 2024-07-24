@@ -41,12 +41,16 @@ const AddPost = () => {
     console.log(title, tag, imageUrl, bodyPost);
     if (title !== "" && tag !== "" && imageUrl !== "" && bodyPost !== "") {
       await axios
-        .post(`/api/createPost`, {
-          title: title,
-          tag: tag,
-          image: imageUrl,
-          body: bodyPost,
-        })
+        .post(
+          `/api/createPost`,
+          {
+            title: title,
+            tag: tag,
+            image: imageUrl,
+            body: bodyPost,
+          },
+          
+        )
         .then((res) => {
           console.log(res);
         });

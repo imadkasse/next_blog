@@ -40,7 +40,9 @@ const Page = async () => {
 
 async function getData() {
   try {
-    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/posts`);
+    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/posts`, {
+      cache: "no-store",
+    });
     return res.data;
   } catch (error) {
     console.error("Error fetching posts:", error);

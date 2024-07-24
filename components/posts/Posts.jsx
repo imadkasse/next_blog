@@ -8,7 +8,7 @@ const Posts = async () => {
   const session = await getServerSession(authOption);
   console.log(session?.user.name);
   const data = await getData();
-  console.log(data)
+  console.log(data);
   if (!data.posts || data.posts.length === 0) {
     return (
       <div className=" dark:text-primary-night text-primary-day   py-12">
@@ -37,7 +37,7 @@ const Posts = async () => {
             </tr>
           </thead>
           <tbody className="bg-transparent divide-y   divide-slate-800 dark:divide-slate-400 whitespace-wrap">
-          {data.posts.map((post) => (
+            {data.posts.map((post) =>
               session?.user?.image === post.userImg ? (
                 <tr key={post._id}>
                   <td className="px-4 py-4 text-sm text-center">
@@ -67,11 +67,8 @@ const Posts = async () => {
               ) : (
                 ""
               )
-            ))}
+            )}
           </tbody>
-            
-              
-         
         </table>
       </div>
     </div>
@@ -79,7 +76,9 @@ const Posts = async () => {
 };
 async function getData() {
   try {
-    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/posts`);
+    const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/posts`, {
+      cache: "no-store",
+    });
     return res.data;
   } catch (error) {
     console.error("Error fetching posts:", error);
