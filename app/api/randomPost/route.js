@@ -4,18 +4,28 @@ import { NextResponse } from "next/server";
 
 export async function GET(req) {
   await connectToDB();
+
   try {
     const count = await Post.countDocuments();
+    if (count === 0) {
+      return NextResponse.json(
+        {
+          message: "No posts available",
+        },
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     const random = Math.floor(Math.random() * count);
     const randomPost = await Post.findOne().skip(random);
+
     return NextResponse.json(
       {
-        message: "Post created successfully",
+        message: "Post retrieved successfully",
         randomPost: randomPost,
       },
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
-    console.log(count);
   } catch (error) {
     console.log(error);
     return NextResponse.json(

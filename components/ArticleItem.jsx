@@ -9,6 +9,7 @@ import Image from "next/image";
 const ArticleItem = async () => {
   const data = await getData();
   const post = data.randomPost || {};
+  
 
   // التحقق من وجود البيانات قبل عرض المكون
   if (!post || post.length === 0) {
