@@ -8,13 +8,21 @@ export async function GET(req, { params }) {
   try {
     const postID = params.postID;
     const post = await Post.findById(postID);
-    
+
     return NextResponse.json(
       {
         message: "post GETED successfully",
         post: post,
       },
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   } catch (error) {
     console.log(error);
@@ -23,7 +31,15 @@ export async function GET(req, { params }) {
         message: "Oops, an error occurred",
         error: error.message,
       },
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   }
 }

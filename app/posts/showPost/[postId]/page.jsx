@@ -57,7 +57,14 @@ const page = async ({ params }) => {
   );
 };
 async function getData(id) {
-  const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/post/${id}`,{ cache: 'no-store' });
+  const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/post/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    },
+  });
   return res.data;
 }
 

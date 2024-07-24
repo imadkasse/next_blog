@@ -19,14 +19,30 @@ export async function POST(req) {
     if (!session) {
       return NextResponse.json(
         { message: "Not authenticated" },
-        { status: 401 }
+        {
+          status: 401,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        }
       );
     }
 
     if (!title || !tag || !image || !body) {
       return NextResponse.json(
         { error: "Missing required fields" },
-        { status: 400 }
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        }
       );
     }
 
@@ -52,7 +68,15 @@ export async function POST(req) {
         message: "Post created successfully",
         post: post,
       },
-      { status: 201, headers: { "Content-Type": "application/json" } }
+      {
+        status: 201,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   } catch (error) {
     console.log(error);
@@ -61,7 +85,15 @@ export async function POST(req) {
         message: "Oops, an error occurred",
         error: error.message,
       },
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   }
 }

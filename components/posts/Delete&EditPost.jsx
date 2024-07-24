@@ -44,12 +44,23 @@ const DeleteAndEditPost = ({ id }) => {
   const handelEdit = async (e) => {
     e.preventDefault();
     if (title !== "" && tag !== "" && imageUrl !== "" && bodyPost !== "") {
-      await axios.put(`/api/updatePost/${id}`, {
-        title: title,
-        tag: tag,
-        image: imageUrl,
-        body: bodyPost,
-      });
+      await axios.put(
+        `/api/updatePost/${id}`,
+        {
+          title: title,
+          tag: tag,
+          image: imageUrl,
+          body: bodyPost,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        }
+      );
       setOpenResolve(true);
       setBodyPost("");
       setTag("");
@@ -63,7 +74,14 @@ const DeleteAndEditPost = ({ id }) => {
   const handelDelete = async (e) => {
     e.preventDefault();
     try {
-      await axios.delete(`/api/deletePost/${id}`);
+      await axios.delete(`/api/deletePost/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      });
       setOpenResolve(true);
       router.refresh();
     } catch (error) {

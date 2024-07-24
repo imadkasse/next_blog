@@ -11,7 +11,15 @@ export async function DELETE(req, { params }) {
       {
         message: "Post Deleted successfully",
       },
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   } catch (error) {
     console.log(error);
@@ -20,7 +28,15 @@ export async function DELETE(req, { params }) {
         message: "Oops, an error occurred",
         error: error.message,
       },
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   }
 }

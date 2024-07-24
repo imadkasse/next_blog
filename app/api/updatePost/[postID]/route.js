@@ -19,7 +19,15 @@ export async function PUT(req, { params }) {
     if (!session) {
       return NextResponse.json(
         { message: "Not authenticated" },
-        { status: 401 }
+        {
+          status: 401,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        }
       );
     }
     if (!title || !tag || !image || !body) {
@@ -48,7 +56,18 @@ export async function PUT(req, { params }) {
     );
 
     if (!postUpdating) {
-      return NextResponse.json({ message: "Post not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "Post not found" },
+        {
+          status: 404,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        }
+      );
     }
 
     postUpdating.save();
@@ -60,7 +79,15 @@ export async function PUT(req, { params }) {
         message: "Post updated successfully",
         post: postUpdating,
       },
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   } catch (error) {
     console.log(error);
@@ -69,7 +96,15 @@ export async function PUT(req, { params }) {
         message: "Oops, an error occurred",
         error: error.message,
       },
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   }
 }

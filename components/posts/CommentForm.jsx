@@ -14,13 +14,28 @@ const CommentForm = ({ id }) => {
     e.preventDefault();
 
     if (text !== "") {
-      await axios.post(`/api/createComment`, {
-        text: text,
-        postId: id,
-      });
+      await axios
+        .post(
+          `/api/createComment`,
+          {
+            text: text,
+            postId: id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Cache-Control": "no-cache, no-store, must-revalidate",
+              Pragma: "no-cache",
+              Expires: "0",
+            },
+          }
+        )
+        .catch((error) => {
+          setOpenRejecte(true);
+        });
       setOpenResolve(true);
       setText("");
-      router.refresh()
+      router.refresh();
     } else {
       console.log("Opps,An Error");
       setOpenRejecte(true);
@@ -47,7 +62,7 @@ const CommentForm = ({ id }) => {
           open={openRejecte}
           autoHideDuration={2000}
           onClose={handleClose}
-          message="Opps An Error"
+          message="Plase sign up or sign in "
         />
       </div>
       <form className="my-12" onSubmit={handelSubmit}>

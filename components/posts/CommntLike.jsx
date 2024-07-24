@@ -32,7 +32,12 @@ const CommntLike = async ({ id }) => {
 };
 async function getData(id) {
   const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/comment/${id}`, {
-    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    },
   });
   return res.data;
 }
