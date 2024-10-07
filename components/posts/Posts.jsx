@@ -3,6 +3,8 @@ import axios from "axios";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import DeleteAndEditPost from "./Delete&EditPost";
+import next from "next";
+import { revalidatePath } from "next/cache";
 
 const Posts = async () => {
   const session = await getServerSession(authOption);
@@ -83,6 +85,7 @@ async function getData() {
         Pragma: "no-cache",
         Expires: "0",
       },
+      next: { revalidate: 3600 },
     });
     return res.data;
   } catch (error) {
