@@ -85,7 +85,7 @@ async function getData() {
         Pragma: "no-cache",
         Expires: "0",
       },
-      next: { revalidate: 3600 },
+      next: { revalidate: 120 },
     });
     return res.data;
   } catch (error) {
