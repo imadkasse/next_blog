@@ -76,16 +76,15 @@ const Posts = async () => {
     </div>
   );
 };
-async function getData() {
+export async function getData() {
   try {
     const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/posts`, {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Cache-Control": "no-cache, no-store, must-revalidate", // منع الكاش
         Pragma: "no-cache",
         Expires: "0",
       },
-      next: { revalidate: 120 },
     });
     return res.data;
   } catch (error) {
@@ -96,4 +95,5 @@ async function getData() {
     };
   }
 }
+export const revalidate = 120;
 export default Posts;
