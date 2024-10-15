@@ -81,7 +81,7 @@ export async function getData() {
     const res = await axios.get(`${process.env.NEXTAUTH_URL}/api/posts`, {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-cache, no-store, must-revalidate", // منع الكاش
+        "Cache-Control": "no-cache, no-store, must-revalidate",
         Pragma: "no-cache",
         Expires: "0",
       },

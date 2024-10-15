@@ -1,7 +1,7 @@
 import Post from "@/components/posts/Post";
 import axios from "axios";
 
-const Page = async () => {
+const page = async () => {
   const data = await getData();
 
   if (!data.posts || data.posts.length === 0) {
@@ -58,4 +58,4 @@ async function getData() {
   }
 }
 
-export default Page;
+export default page;
